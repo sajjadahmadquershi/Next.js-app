@@ -62,7 +62,7 @@ const projectsData = [
   {
     id: 7,
     title: "Make a pype voice in SolidWorks",
-    // description: "Introducing the Vice Mechanical Tool in SolidWorks: Revolutionize your design process with precision and efficiency. Seamlessly integrate intricate vices into your mechanical projects, ensuring unparalleled functionality and performance. Unlock new dimensions of creativity and streamline your workflow with SolidWorks' cutting-edge Vice Mechanical Tool.",
+   
     image: "/images/projects/7.jpg",
     tag: ["All", "2D,3D"],
     gitUrl: "/",
