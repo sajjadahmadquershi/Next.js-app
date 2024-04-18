@@ -23,7 +23,7 @@ const TAB_DATA = [
     id: "education",
     content: (
       <ul className="list-disc pl-2">
-        <li>Bachelor's Computer science</li>
+        <li>Bs Computer science</li>
         
       </ul>
     ),
@@ -62,7 +62,7 @@ const AboutSection = () => {
             I specialize in 3D design, blending creativity with technical precision to craft captivating visual experiences.
             With expertise in SolidWorks, Revit, and Lumion, I bring ideas to life, from intricate mechanical
             components to architectural wonders. My passion for innovation extends to 3D printing, where I
-            leverage cutting-edge technology to turn concepts into tangible realities. Let's collaborate to turn your
+            leverage cutting-edge technology to turn concepts into tangible realities. collaborate to turn your
             visions into stunning 3D-printed masterpieces.
           </p>
           <div className="flex flex-row justify-start mt-8">
