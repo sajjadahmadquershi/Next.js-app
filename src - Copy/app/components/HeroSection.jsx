@@ -39,7 +39,7 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Transforming imagination into reality, one pixel at a time. Let's sculpt your dreams into 3D-printed wonders!.
+            Transforming imagination into reality, one pixel at a time. Let&apos;s sculpt your dreams into 3D-printed wonders!.
           </p>
           <div className="flex justify-around items-end">
             <Link
