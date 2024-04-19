@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <section className="lg:py-16">
+       <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -39,24 +39,22 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Transforming imagination into reality, one pixel at a time. sculpt your dreams into 3D-printed wonders!.
+            Transforming imagination into reality, one pixel at a time. Let s sculpt your dreams into 3D-printed wonders!.
           </p>
-          <div className="flex justify-around items-end">
-            <Link
-              href="https://wa.me/message/FYPCUDSRLRNFG1"
-              className="px-8 flex inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
-            >
-              Hire me on Whatsapp&nbsp; <Image className="w-6" src={Whatsapp} alt="email Icon" />
-            </Link>
-            <Link
-              href="https://www.fiverr.com/s/K2BYm2"
-              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
-            >
-              <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2 flex">
-                Hire me on fiver&nbsp; <Image className="w-6" src={fiver} alt="email Icon" />
-              </span>
-            </Link>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-around items-end">
+  <Link
+    href="https://wa.me/message/FYPCUDSRLRNFG1"
+    className="px-8 flex justify-around py-3 rounded-full mb-4 sm:mb-0 w-full sm:w-auto bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
+  >
+    Hire me on Whatsapp&nbsp; <Image className="w-6" src={Whatsapp} alt="Whatsapp Icon" />
+  </Link>
+  <Link
+    href="https://www.fiverr.com/s/K2BYm2"
+    className="px-8 flex justify-around py-3 rounded-full w-full sm:w-auto bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white"
+  >
+    Hire me on Fiverr&nbsp; <Image className="w-6" src={fiver} alt="Fiverr Icon" />
+  </Link>
+</div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
