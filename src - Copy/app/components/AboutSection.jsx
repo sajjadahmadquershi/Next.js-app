@@ -51,7 +51,7 @@ const AboutSection = () => {
   };
 
   return (
-   <section className="text-white" id="about">
+<section className="text-white" id="about">
   <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
     {/* <Image src="/images/about-image.png" width={500} height={500} /> */}
     {/* <video src="" width={500} height={500} /> */}
@@ -60,7 +60,7 @@ const AboutSection = () => {
         className="w-full"
         width="500"
         height="315"
-        src="https://www.youtube.com/embed/X7XJX_hky80?si=-uTnOGV6UgbNjd3z"
+        src="https://www.youtube.com/embed/X7XJX_hky80?si=e28byYpwpMlsjA4G"
         title="YouTube video player"
         frameBorder="1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -106,6 +106,7 @@ const AboutSection = () => {
     </div>
   </div>
 </section>
+
   );
 };
 
