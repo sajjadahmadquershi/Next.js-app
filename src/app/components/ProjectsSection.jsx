@@ -68,6 +68,15 @@ const projectsData = [
     gitUrl: "/",
     previewUrl: "/",
   },
+   {
+    id: 8,
+    title: "Make a design in SolidWorks",
+   
+    image: "https://images.app.goo.gl/Ss9mXENpK636kHGU6",
+    tag: ["All", "2D,3D"],
+    gitUrl: "/",
+    previewUrl: "/",
+  },
 ];
 
 const ProjectsSection = () => {
