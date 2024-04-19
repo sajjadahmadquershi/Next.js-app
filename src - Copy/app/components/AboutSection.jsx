@@ -60,7 +60,7 @@ const AboutSection = () => {
         className="w-full"
         width="500"
         height="315"
-        src="https://www.youtube.com/embed/X7XJX_hky80?si=e28byYpwpMlsjA4G"
+        src="https://www.youtube.com/embed/X7XJX_hky80?si=-uTnOGV6UgbNjd3z"
         title="YouTube video player"
         frameBorder="1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
