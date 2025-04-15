@@ -1,9 +1,37 @@
-import React, { useState } from "react";
-import { PlayCircleIcon, EyeIcon } from "@heroicons/react/24/outline";
+import React, { useState,useEffect,useRef } from "react";
+import { PlayCircleIcon, EyeIcon, CodeBracketIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const ProjectCard = ({ image_url, title, description, gitUrl, previewUrl }) => {
   const [showModal, setShowModal] = useState(false);
+  const videoRef = useRef(null);
+
+
+  useEffect(() => {
+    const video = videoRef.current;
+    console.log("Autoplay started"); 
+    if (!video) return;
+  
+    const playBriefly = async () => {
+      try {
+        await video.play();
+        console.log("Autoplay started");  
+        setTimeout(() => {
+          video.pause();
+        }, 100); // آدھے سیکنڈ بعد روک دو
+      } catch (err) {
+        console.error("Autoplay failed:", err.message);
+      }
+    };
+  
+    if (video.readyState >= 2) {
+      playBriefly();
+    } else {
+      video.addEventListener("loadeddata", playBriefly);
+      return () => video.removeEventListener("loadeddata", playBriefly);
+    }
+  }, []);
+  
 
   const openModal = (event) => {
     event.preventDefault();
@@ -23,10 +51,11 @@ const ProjectCard = ({ image_url, title, description, gitUrl, previewUrl }) => {
     <div>
       <div
         className="h-52 md:h-72 rounded-t-xl relative group"
-        onClick={openModal}
+
       >
         {isVideo(image_url) ? (
           <video
+          ref={videoRef}
             src={image_url}
             className="h-full w-full rounded-t-xl object-cover"
             poster={image_url} // Show preview image before playing
@@ -48,10 +77,10 @@ const ProjectCard = ({ image_url, title, description, gitUrl, previewUrl }) => {
               backgroundSize: "cover",
             }}/>
         )}
-        <div className={isVideo(image_url) ? ("overlay items-center justify-center absolute top-0 left-0 w-full h-full  bg-[#181818] bg-opacity-0 flex transition-all duration-500 group-hover:opacity-0 group-hover:hidden") : ("overlay items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500")}>
+        <div className={isVideo(image_url) ? ("items-center justify-center group-hover:group-aria-hidden:pointer-events-none absolute top-0 left-0 w-full h-full  flex pointer-events-none") : ("overlay items-center justify-center absolute top-0 left-0 w-full h-full bg-[#181818] bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500")}>
           <Link
             href={image_url}
-            className="h-14 w-14 border-2 relative rounded-full border-[#ADB7BE] hover:border-white group/link"
+            className="h-14 w-14 border-2 relative rounded-full border-[rgb(173,180,190)] hover:border-white group/link pointer-events-auto"
             onClick={openModal}
           >
             {isVideo(image_url) ? (
@@ -61,6 +90,15 @@ const ProjectCard = ({ image_url, title, description, gitUrl, previewUrl }) => {
               <EyeIcon className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group-hover/link:text-white" />
             )}
           </Link>
+          {previewUrl && (
+          <Link
+            href={previewUrl}
+            className="h-14 w-14 mr-2 border-2 relative rounded-full border-[#ADB7BE] hover:border-white group/link pointer-events-auto"
+            target="_blank" // New tab will open
+          >
+            <CodeBracketIcon className="h-10 w-10 text-[#ADB7BE] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  cursor-pointer group-hover/link:text-white" />
+          </Link>
+          )}
         </div>
       </div>
       <div className="text-white rounded-b-xl mt-3 bg-[#181818] py-6 px-4">

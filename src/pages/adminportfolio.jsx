@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import "@/styile/adminportfolio.css";
 import '../app/globals.css';
 import { supabase } from "@/lib/supabaseClient";
-import AdminTags from "./AdminTags";
+import AdminTags from "./Admintags";
 import Image from "next/image";
 
 
@@ -82,6 +82,12 @@ const AdminPortfolio = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    if (formData.tag=="All"){
+      alert("Not Allow All tag");
+      setIsSubmitting(false);
+      return;
+    } 
+     
 
     const { title, category, tag, customTag, file, web_link } = formData;
     const finalTag = customTag ? customTag : tag;
