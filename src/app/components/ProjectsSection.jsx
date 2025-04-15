@@ -36,7 +36,7 @@ const ProjectsSection = () => {
 
         const allTags = filteredByCategory.flatMap(p => p.tag);
 const uniqueTags = [...new Set(allTags)];
-setTags(["All", ...uniqueTags]); // ✅ "All" tag manually added
+setTags(["All", ...uniqueTags]); 
       }
     };
 
@@ -80,8 +80,8 @@ setTags(["All", ...uniqueTags]); // ✅ "All" tag manually added
               key={project.id}
               title={project.title}
               image_url={project.image_url}
-              gitUrl={project.gitUrl}  // اگر نہیں ہے تو اسے remove کر دو یا optional رکھو
-              previewUrl={project.web_link} // ✅ یہاں پر web_link pass کرو
+              gitUrl={project.gitUrl}  
+              previewUrl={project.web_link} 
             />
           </motion.li>
         ))}

@@ -152,9 +152,7 @@ const AboutSection = () => {
             {
               pathname.includes("web")
                 ? `We specialize in modern web development, combining clean code with user-focused design to create fast, responsive, and visually engaging websites. With hands-on expertise in React, Next.js, Laravel, and modern CSS frameworks like Tailwind, we build everything from sleek portfolios to dynamic web apps. Whether it's integrating databases like Firebase or Supabase, crafting RESTful APIs, or developing full-stack solutions — we bring ideas to life on the web. Let’s build digital experiences that leave a lasting impression.`
-                : `We provide both 2D and 3D design services along with laser cutting-ready DXF files. Our work includes mechanical parts, architectural layouts, and detailed models using tools like SolidWorks, Revit, and Lumion. We also prepare files for CNC and laser cutting with precision and accuracy. Whether it's for printing, modeling, or production — we help turn your ideas into reliable and usable formats.
-
-`
+                : `We provide both 2D and 3D design services along with laser cutting-ready DXF files. Our work includes mechanical parts, architectural layouts, and detailed models using tools like SolidWorks, Revit, and Lumion. We also prepare files for CNC and laser cutting with precision and accuracy. Whether it's for printing, modeling, or production — we help turn your ideas into reliable and usable formats.`
             }
           </p>
           <div className="flex flex-row justify-start mt-8">
