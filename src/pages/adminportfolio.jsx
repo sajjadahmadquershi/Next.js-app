@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import ProjectCard from "../app/components/ProjectCard";
+import ProjectCard from "@/app/components/ProjectCard";
 import { motion, useInView } from "framer-motion";
 import "@/styile/adminportfolio.css";
-import '../app/globals.css';
+import '@/app/globals.css';
 import { supabase } from "@/lib/supabaseClient";
-import AdminTags from "./AdminTags";
+import AdminTags from "@/pages/Admintags";
 import Image from "next/image";
 
 

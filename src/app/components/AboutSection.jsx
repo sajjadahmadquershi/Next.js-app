@@ -1,7 +1,7 @@
 "use client";
 import React, { useTransition, useState, useEffect } from "react";
 import Image from "next/image";
-import TabButton from "./TabButton";
+import TabButton from "@/app/components/TabButton";
 import { usePathname } from 'next/navigation';
 import { supabase } from "@/lib/supabaseClient";
 
