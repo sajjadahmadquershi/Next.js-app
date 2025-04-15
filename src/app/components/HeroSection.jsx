@@ -1,13 +1,37 @@
 "use client";
-import React from "react";
+import React, { useTransition, useState, useEffect } from "react";
 import Image from "next/image";
 import Whatsapp from "../../../public/whatsapp.svg";
 import fiver from "../../../public/fiverr-1.svg";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
+import "@/styile/adminportfolio.css";
+import '@/app/globals.css';
+import { supabase } from "@/lib/supabaseClient";
+
 
 const HeroSection = () => {
+  const [siteContent, setSiteContent] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+
+      const { data, error } = await supabase
+        .from('site_content')
+        .select('*');
+
+      if (error) {
+
+      } else {
+        setSiteContent(data);
+      }
+
+    };
+
+    fetchData();
+  }, []);
+  const pathname = usePathname();
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -17,44 +41,73 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
         >
-          <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hello, I&apos;make{" "}
-            </span>
-            <br></br>
-            <TypeAnimation
-              sequence={[
-                "2d design",
-                1000,
-                "3d design",
-                1000,
-                "3d rendering",
-                1000,
-                ".fbx, .stl, .dxf etc",
-                1000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
-          </h1>
-          <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Transforming imagination into reality, one pixel at a time. Let s sculpt your dreams into 3D-printed wonders!.
-          </p>
-          <div className="flex justify-around items-end">
+          {pathname.includes("web") ? (
+            <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-7xl lg:leading-normal font-extrabold">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
+                Hello, I&apos;m into{" "}
+              </span>
+              <br />
+              <TypeAnimation
+
+                sequence={[
+                  "Web Developer",
+                  1000,
+                  "React / Next.js",
+                  1000,
+                  "Firebase",
+                  1000,
+                  "Supabase",
+                  1000,
+                  "Laravel",
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </h1>
+          ) : (
+            <h1 className="text-white mb-4 text-4xl sm:text-4xl lg:text-7xl lg:leading-normal font-extrabold">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
+                Hello, I&apos;m a{" "}
+              </span>
+              <br />
+              <TypeAnimation
+                sequence={[
+                  "2d design",
+                  1000,
+                  "3d design",
+                  1000,
+                  "3d rendering",
+                  1000,
+                  ".fbx, .stl, .dxf etc",
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </h1>
+          )}
+
+          <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl max-w-full sm:max-w-[90%] md:max-w-[80%]">
+  {pathname.includes("web")
+    ? "Crafting digital experiences that connect, engage, and inspire. From clean code to captivating design — let’s build your online presence together!"
+    : "Bringing imagination to life — one pixel, one layer at a time. Let’s turn your ideas into stunning 2D visuals and 3D-printed masterpieces!"
+  }
+</p>
+          <div className="flex flex-col sm:flex-row justify-around items-end sm:text-0.5">
             <Link
               href="https://wa.me/message/FYPCUDSRLRNFG1"
-              className="px-8 flex inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
+              className="px-8 flex justify-around py-3 rounded-full mb-4 sm:mb-0 w-full sm:w-auto bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
             >
-              Hire me on Whatsapp&nbsp; <Image className="w-6" src={Whatsapp} alt="email Icon" />
+              Hire me on Whatsapp&nbsp; <Image className="w-6 heartbeat" src={Whatsapp} alt="Whatsapp Icon" />
             </Link>
             <Link
               href="https://www.fiverr.com/s/K2BYm2"
-              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
+              className="px-8 flex justify-around py-3 rounded-full w-full sm:w-auto bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white"
             >
-              <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2 flex">
-                Hire me on fiver&nbsp; <Image className="w-6" src={fiver} alt="email Icon" />
-              </span>
+              Hire me on Fiverr&nbsp; <Image className="w-6 heartbeat" src={fiver} alt="Fiverr Icon" />
             </Link>
           </div>
         </motion.div>
@@ -64,13 +117,11 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           className="col-span-4 place-self-center mt-4 lg:mt-0"
         >
-          <div className="rounded-full bg-[#181818] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] relative">
-            <Image
-              src="/images/hero-image.png"
+          <div className="hero rounded-full bg-[#181818] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] relative overflow-hidden shake-horizontal">
+            <img
+              src={siteContent[0]?.main_image_url || "/images/hero-image.png"}
               alt="hero image"
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              width={300}
-              height={300}
+              className="rounded-full object-cover w-full h-full cursor-pointer"
             />
           </div>
         </motion.div>

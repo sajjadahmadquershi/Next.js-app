@@ -1,131 +1,87 @@
 "use client";
-import React, { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import { motion, useInView } from "framer-motion";
-
-const projectsData = [
-  {
-    id: 1,
-    title: "Iron and wooden table in SolidWorks",
-    // description: "Craft elegant and durable iron and wooden tables effortlessly in SolidWorks. From sleek contemporary designs to timeless classics, unleash your creativity and bring your vision to life with precise modeling and realistic rendering. Elevate any space with these versatile and stylish tables, meticulously crafted to meet your specifications and exceed your expectations.",
-    image: "/images/projects/1.jpg",
-    tag: ["All", "2D,3D"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 2,
-    title: "Gaier set make in SolidWorks",
-    // description: "Project 2 description",
-    image: "/images/projects/2.png",
-    tag: ["All", "2D,3D"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 3,
-    title: "Soler plates structure",
-    // description: "Project 3 description",
-    image: "/images/projects/4.png",
-    tag: ["All", "2D,3D"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 4,
-    title: "Shop make in Sketch Up & Lumion",
-    // description: "Project 4 description",
-    image: "/images/projects/3.jpg",
-    tag: ["All", "3D Render"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 5,
-    title: "Make a sofa in SolidWorks",
-    // description: "Authentication and CRUD operations",
-    image: "/images/projects/5.png",
-    tag: ["All", "2D,3D"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 6,
-    title: "Whier house structure",
-    // description: "Project 5 description",
-    image: "/images/projects/6.jpg",
-    tag: ["All", "2D,3D"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 7,
-    title: "Make a pype voice in SolidWorks",
-   
-    image: "/images/projects/7.jpg",
-    tag: ["All", "2D,3D"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-];
+import { usePathname } from 'next/navigation';
+import { supabase } from "@/lib/supabaseClient";
 
 const ProjectsSection = () => {
+  const pathname = usePathname();
+  const [projects, setProjects] = useState([]);
   const [tag, setTag] = useState("All");
+  const [tags, setTags] = useState([]);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-
-  const handleTagChange = (newTag) => {
-    setTag(newTag);
-  };
-
-  const filteredProjects = projectsData.filter((project) =>
-    project.tag.includes(tag)
-  );
 
   const cardVariants = {
     initial: { y: 50, opacity: 0 },
     animate: { y: 0, opacity: 1 },
   };
 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data, error } = await supabase
+        .from('portfolio_items')
+        .select('*');
+
+      if (error) {
+      } else {
+        setProjects(data);
+
+        const currentCategory = pathname.includes("web") ? "web" : "design";
+        const filteredByCategory = data.filter(p =>
+          currentCategory === "web" ? p.category === "web" : p.category !== "web"
+        );
+
+        const allTags = filteredByCategory.flatMap(p => p.tag);
+const uniqueTags = [...new Set(allTags)];
+setTags(["All", ...uniqueTags]); // ✅ "All" tag manually added
+      }
+    };
+
+    fetchProjects();
+  }, [pathname]);
+
+  const filteredProjects = projects.filter((project) => {
+    const inCategory = pathname.includes("web")
+      ? project.category === "web"
+      : project.category !== "web";
+  
+    const matchTag = tag === "All" || project.tag.includes(tag);
+  
+    return inCategory && matchTag;
+  });
+
   return (
     <section id="projects">
-      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
+      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8">
         My Projects
       </h2>
-      <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
-        <ProjectTag
-          onClick={handleTagChange}
-          name="All"
-          isSelected={tag === "All"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="2D,3D"
-          isSelected={tag === "2D,3D"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="3D Render"
-          isSelected={tag === "3D Render"}
-        />
+
+      {/* Tag Filters */}
+      <div className="flex flex-row justify-center items-center gap-2 py-6 flex-wrap">
+        {tags.map((t, index) => (
+          <ProjectTag key={index} onClick={() => setTag(t)} name={t} isSelected={tag === t} />
+        ))}
       </div>
-      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
+
+      {/* Projects */}
+      <ul ref={ref} className="grid md:grid-cols-3 gap-8">
         {filteredProjects.map((project, index) => (
           <motion.li
-            key={index}
+            key={project.id}
             variants={cardVariants}
             initial="initial"
             animate={isInView ? "animate" : "initial"}
-            transition={{ duration: 0.3, delay: index * 0.4 }}
+            transition={{ duration: 0.3, delay: index * 0.2 }}
           >
             <ProjectCard
               key={project.id}
               title={project.title}
-              description={project.description}
-              imgUrl={project.image}
-              gitUrl={project.gitUrl}
-              previewUrl={project.previewUrl}
+              image_url={project.image_url}
+              gitUrl={project.gitUrl}  // اگر نہیں ہے تو اسے remove کر دو یا optional رکھو
+              previewUrl={project.web_link} // ✅ یہاں پر web_link pass کرو
             />
           </motion.li>
         ))}
