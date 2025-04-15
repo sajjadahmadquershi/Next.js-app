@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import "@/styile/adminportfolio.css";
 import '@/app/globals.css';
 import { supabase } from "@/lib/supabaseClient";
-import AdminTags from "@/pages/AdminTags";
+import AdminTags from "./AdminTags";
 import Image from "next/image";
 
 
