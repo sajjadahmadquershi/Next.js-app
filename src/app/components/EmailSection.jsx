@@ -3,6 +3,8 @@ import fiver from "../../../public/fiverr-1.svg";
 import Whatsapp from "../../../public/whatsapp.svg";
 import Link from "next/link";
 import Image from "next/image";
+import '@/app/globals.css';
+
 
 const EmailSection = () => {
  
@@ -30,7 +32,7 @@ const EmailSection = () => {
         <Link href="https://www.fiverr.com/s/K2BYm2">
           <button
             type="submit"
-            className="bg-primary-500 hover:bg-primary-600 text-white mt-3 font-medium py-2.5 px-5 flex items-center justify-around rounded-lg w-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
+            className=" mt-3 font-medium py-2.5 px-5 flex items-center justify-around rounded-lg w-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
           >
             <Image className="w-12 heartbeat" src={fiver} alt="email Icon" />
             My Fiverr
@@ -40,7 +42,7 @@ const EmailSection = () => {
         <Link href="https://wa.me/message/FYPCUDSRLRNFG1">
           <button
             type="submit"
-            className="bg-primary-500 hover:bg-primary-600 text-white mt-3 font-medium py-2.5 px-5 flex items-center justify-around rounded-lg w-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
+            className=" mt-3 font-medium py-2.5 px-5 flex items-center justify-around rounded-lg w-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
           >
             <Image className="w-12 ml-3 heartbeat" src={Whatsapp} alt="email Icon" />
             My WhatsApp
