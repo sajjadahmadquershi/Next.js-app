@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import "@/styile/adminportfolio.css";
 import '../app/globals.css';
 import { supabase } from "@/lib/supabaseClient";
-import Admintags from "./Admintags";
+import AdminTags from "./AdminTags";
 import Image from "next/image";
 
 
@@ -413,7 +413,7 @@ const AdminPortfolio = () => {
       </div>
 
       <div className="admin-portfolio dark-mode">
-        <Admintags onTagSelect={handleTagSelect} />
+        <AdminTags onTagSelect={handleTagSelect} />
 
       </div>
 
