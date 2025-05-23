@@ -82,7 +82,7 @@ const AdminPortfolio = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (formData.tag === "All") {
+    if (formData.customTag === "All") {
       alert("The 'All' tag is not allowed. Please choose another tag.");
       setIsSubmitting(false);
       return;
